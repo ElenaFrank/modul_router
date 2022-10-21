@@ -3,8 +3,16 @@ import {Route, Switch} from "react-router-dom"
 import Dashboard from "../components/dashboard"
 import Home from "../components/home"
 import Login from "../components/login"
-import Pasts from "../components/pasts"
+// import Posts from "../components/posts"
 import Stats from "../components/stats"
+import PostsList from "../components/postsList"
+import Post from "../components/post"
+
+const posts = [
+    {id:1, label: "post 1"},
+    {id:2, label: "post 2"},
+    {id:3, label: "post 3"}
+]
 
 function App() {
   return (
@@ -13,13 +21,10 @@ function App() {
       <h1>App</h1>
       <Switch>
         <Route path="/dashboard/stats" component = {Stats} />
-        <Route path="/dashboard" 
-          render = { (props) => {
-            return false && <Dashboard isAdmin={false} {...props} />
-          }} 
-        />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/login" component = {Login} />
-        <Route path="/pasts" component = {Pasts} />
+        <Route path="/posts/:postId" render = {(props) => (<Post posts = {posts} {...props} />)} />
+        <Route path="/posts" render = {(props) => (<PostsList posts = {posts} {...props} />)} />
         <Route path="/" component = {Home} />
 
       </Switch>
